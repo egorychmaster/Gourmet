@@ -1,4 +1,6 @@
+using Gourmet.API.StartupTasks;
 using Gourmet.Infrastructure.Database;
+using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,11 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// получаем строку подключения из файла конфигурации
+// БД
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-// добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<GourmetContext>(options => options.UseSqlServer(connection));
-
+builder.Services.AddDbContextFactory<GourmetContext>(opt => opt.UseSqlServer(connection));
+//builder.Services.AddDbContext<GourmetContext>(options => options.UseSqlServer(connection));
+// Инициализация БД.
+builder.Services.AddHostedService<DatabaseInitialization>();
 
 var app = builder.Build();
 

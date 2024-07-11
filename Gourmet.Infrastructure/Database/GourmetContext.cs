@@ -12,8 +12,6 @@ namespace Gourmet.Infrastructure.Database
     {
         public GourmetContext(DbContextOptions<GourmetContext> options) : base(options)
         {
-            Database.EnsureDeleted();   // удаляем бд со старой схемой
-            Database.EnsureCreated();   // создаем бд с новой схемой
         }
 
         public DbSet<User> Users { get; set; }
