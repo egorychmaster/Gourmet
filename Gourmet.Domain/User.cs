@@ -18,5 +18,8 @@
         /// Возраст.
         /// </summary>
         public int Age { get; set; }
+
+
+        public List<FavoriteUsersDish> FavoriteDishes { get; set; } = new();
     }
 }

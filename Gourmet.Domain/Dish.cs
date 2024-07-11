@@ -12,5 +12,9 @@ namespace Gourmet.Domain
     public class Dish
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public List<FavoriteUsersDish> FavoriteUsers { get; set; } = new();
     }
 }

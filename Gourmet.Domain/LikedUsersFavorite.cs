@@ -9,7 +9,12 @@ namespace Gourmet.Domain
     /// <summary>
     /// Лайки пользователя на любимое блюдо из списка другого пользователя.
     /// </summary>
-    public class LikedUsersFavorites
+    public class LikedUsersFavorite
     {
+        public int UserId { get; set; }
+        public int FavoriteId { get; set; }
+
+        public User User { get; set; }
+        public FavoriteUsersDish Favorite { get; set; }
     }
 }
