@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Gourmet.Domain
+﻿namespace Gourmet.Domain
 {
     /// <summary>
     /// Любимое блюдо пользователя в его списке.
@@ -22,7 +16,6 @@ namespace Gourmet.Domain
         //public User User { get; set; } = null!;
         //public Dish Dish { get; set; } = null!;
 
-        //public List<FavoriteUserDish> FavoriteUsersDishes { get; set; } = new();
-        //public List<LikedUserFavorite> LikedUsersFavorites { get; set; } = new();
+        public List<User> LikedUsersDishes { get; set; } = [];
     }
 }

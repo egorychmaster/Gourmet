@@ -64,6 +64,30 @@ namespace Gourmet.Infrastructure.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LikedUsersFavorites",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FavoriteId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikedUsersFavorites", x => new { x.UserId, x.FavoriteId });
+                    table.ForeignKey(
+                        name: "FK_LikedUsersFavorites_FavoriteUsersDishes_FavoriteId",
+                        column: x => x.FavoriteId,
+                        principalTable: "FavoriteUsersDishes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LikedUsersFavorites_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_FavoriteUsersDishes_DishId",
                 table: "FavoriteUsersDishes",
@@ -74,11 +98,19 @@ namespace Gourmet.Infrastructure.Database.Migrations
                 table: "FavoriteUsersDishes",
                 columns: new[] { "UserId", "DishId" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LikedUsersFavorites_FavoriteId",
+                table: "LikedUsersFavorites",
+                column: "FavoriteId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LikedUsersFavorites");
+
             migrationBuilder.DropTable(
                 name: "FavoriteUsersDishes");
 

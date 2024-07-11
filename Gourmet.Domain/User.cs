@@ -24,7 +24,6 @@
 
 
         public List<Dish> Dishes { get; set; } = [];
-        //public List<FavoriteUserDish> FavoriteUsersDishes { get; set; } = new();
-        //public List<LikedUserFavorite> LikedUsersFavorites { get; set; } = new();
+        public List<FavoriteUserDish> LikedFavoriteDishes { get; set; } = [];
     }
 }
