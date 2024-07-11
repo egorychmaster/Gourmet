@@ -28,21 +28,11 @@ namespace Gourmet.Infrastructure.Database
                 // Limit the size of columns to use efficient database types
                 eb.Property(e => e.Name).HasMaxLength(TableFieldsConst.UserFldNameLenght).IsRequired();
 
-                //// Relationships
-                //eb.HasMany(c => c.Dishes)
-                //.WithMany(s => s.Users)
-                ////.UsingEntity<FavoriteUsersDish>()
-                //.UsingEntity<FavoriteUsersDish>(f =>
-                //{
-                //    // Primary key
-                //    f.HasKey(x => x.Id);
-
-                //    // Index
-                //    //f.HasIndex(x => new { x.UserId, x.DishId }).IsUnique();
-
-                //    //f.ToTable("FavoriteUsersDishes");
-                //})
-                //;
+                // Relationships
+                eb.HasMany(e => e.Dishes)
+                    .WithMany(e => e.Users)
+                    .UsingEntity<FavoriteUserDish>()
+                    ;
 
                 // Maps to table
                 eb.ToTable("Users");
@@ -61,7 +51,7 @@ namespace Gourmet.Infrastructure.Database
                 eb.ToTable("Dishes");
             });
 
-            modelBuilder.Entity<FavoriteUsersDish>(eb =>
+            modelBuilder.Entity<FavoriteUserDish>(eb =>
             {
                 // Primary key
                 eb.HasKey(e => e.Id);
@@ -69,20 +59,41 @@ namespace Gourmet.Infrastructure.Database
                 // Index
                 eb.HasIndex(x => new { x.UserId, x.DishId }).IsUnique();
 
-                eb.HasOne(e => e.User)
-                    .WithMany(e => e.FavoriteDishes)
-                    .HasForeignKey(e => e.UserId)
-                    .IsRequired();
+                //eb.HasOne(e => e.User)
+                //    .WithMany(e => e.FavoriteUsersDishes)
+                //    .HasForeignKey(e => e.UserId)
+                //    .IsRequired()
+                //    ;
 
-                eb.HasOne(e => e.Dish)
-                    .WithMany(e => e.FavoriteUsers)
-                    .HasForeignKey(e => e.DishId)
-                    .IsRequired();
+                //eb.HasOne(e => e.Dish)
+                //    .WithMany()//e => e.FavoriteUsersDishes)
+                //    .HasForeignKey(e => e.DishId)
+                //    .IsRequired()
+                //    ;
 
                 // Maps to table
                 eb.ToTable("FavoriteUsersDishes");
             });
 
+            //modelBuilder.Entity<LikedUserFavorite>(eb =>
+            //{
+            //    // Primary key
+            //    eb.HasKey(e => new { e.UserId, e.FavoriteId });
+
+            //    eb.HasOne(e => e.User)
+            //        .WithMany(e => e.LikedUsersFavorites)
+            //        .HasForeignKey(e => e.UserId)
+            //        .IsRequired(false)
+            //        ;
+
+            //    //eb.HasOne(e => e.FavoriteUserDish)
+            //    //    .WithMany(e => e.LikedUsersFavorites)
+            //    //    .HasForeignKey(e => e.FavoriteId)
+            //    //    .IsRequired();
+
+            //    // Maps to table
+            //    eb.ToTable("LikedUsersFavorites");
+            //});
 
             base.OnModelCreating(modelBuilder);
         }

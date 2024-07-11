@@ -39,7 +39,7 @@ namespace Gourmet.Infrastructure.Database.Migrations
                     b.ToTable("Dishes", (string)null);
                 });
 
-            modelBuilder.Entity("Gourmet.Domain.FavoriteUsersDish", b =>
+            modelBuilder.Entity("Gourmet.Domain.FavoriteUserDish", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,33 +87,19 @@ namespace Gourmet.Infrastructure.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("Gourmet.Domain.FavoriteUsersDish", b =>
+            modelBuilder.Entity("Gourmet.Domain.FavoriteUserDish", b =>
                 {
-                    b.HasOne("Gourmet.Domain.Dish", "Dish")
-                        .WithMany("FavoriteUsers")
+                    b.HasOne("Gourmet.Domain.Dish", null)
+                        .WithMany()
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gourmet.Domain.User", "User")
-                        .WithMany("FavoriteDishes")
+                    b.HasOne("Gourmet.Domain.User", null)
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Dish");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Gourmet.Domain.Dish", b =>
-                {
-                    b.Navigation("FavoriteUsers");
-                });
-
-            modelBuilder.Entity("Gourmet.Domain.User", b =>
-                {
-                    b.Navigation("FavoriteDishes");
                 });
 #pragma warning restore 612, 618
         }

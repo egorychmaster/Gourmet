@@ -2,12 +2,15 @@
 {
     public class User
     {
+        public User()
+        { }
+
         public int Id { get; set; }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// Пол.
@@ -20,6 +23,8 @@
         public int Age { get; set; }
 
 
-        public List<FavoriteUsersDish> FavoriteDishes { get; set; } = new();
+        public List<Dish> Dishes { get; set; } = [];
+        //public List<FavoriteUserDish> FavoriteUsersDishes { get; set; } = new();
+        //public List<LikedUserFavorite> LikedUsersFavorites { get; set; } = new();
     }
 }
