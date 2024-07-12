@@ -21,7 +21,6 @@ namespace Gourmet.Infrastructure.RepositoriesQueries
                 .AsNoTracking()
                 .Include(x => x.Dishes)
                 .FirstOrDefaultAsync(x => x.Id == userId);
-
             if (user == null) throw new NotFoundException($"User with id={userId} not found.");
 
             return user.Dishes;

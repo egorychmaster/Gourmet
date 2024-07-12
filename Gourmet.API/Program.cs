@@ -40,6 +40,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies
 
 // Repositories commands.
 builder.Services.AddScoped<IUserCommandsRepository, UserCommandsRepository>();
+builder.Services.AddScoped<IDishCommandsRepository, DishCommandsRepository>();
 
 // Repositories queries.
 builder.Services.AddScoped<IFavoriteQueriesRepository, FavoriteQueriesRepository>();

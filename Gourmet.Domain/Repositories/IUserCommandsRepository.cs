@@ -6,6 +6,11 @@
 
         void Add(User item);
 
+        /// <summary>
+        /// Добавить любимое блюдо пользователю.
+        /// </summary>
+        void AddFavoriteDishToUser(User user, Dish dish);
+
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

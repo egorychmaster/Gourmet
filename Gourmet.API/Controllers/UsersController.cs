@@ -1,7 +1,7 @@
 ﻿using Gourmet.API.Models;
+using Gourmet.Application.Commands.Favorites;
 using Gourmet.Application.Commands.Users;
 using Gourmet.Application.Queries.Favorites;
-using Gourmet.Application.Queries.Favorites.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +59,19 @@ namespace Gourmet.API.Controllers
             return Ok(result.Select(x => new DishModel(x.Id, x.Name)));
         }
 
+        /// <summary>
+        /// Добавить любимое блюдо пользователю.
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя.</param>
+        /// <param name="dishId">Идентификатор блюда.</param>
+        /// <returns></returns>
+        [HttpPost("{id}/FavoriteDishes/{dishId}")]
+        public async Task<ActionResult> AddFavoriteDishToUserAsync([FromRoute] int id, int dishId)
+        {
+            var command = new AddFavoriteDishToUserCommand(id, dishId);
+            var result = await _mediator.Send(command);
+            return Ok();
+        }
         #endregion Favorites
     }
 }

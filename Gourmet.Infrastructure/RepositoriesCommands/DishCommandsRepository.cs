@@ -5,31 +5,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gourmet.Infrastructure.RepositoriesCommands
 {
-    public class UserCommandsRepository : IUserCommandsRepository
+    public class DishCommandsRepository : IDishCommandsRepository
     {
         private readonly GourmetContext _context;
 
-        public UserCommandsRepository(GourmetContext context)
+        public DishCommandsRepository(GourmetContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<User> GetAsync(int id)
+        public async Task<Dish> GetAsync(int id)
         {
-            return await _context.Users
-                .Include(x => x.Dishes)
+            return await _context.Dishes
+                //.Include(x => x.Dishes)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void Add(User item)
-        {
-            _context.Users.Add(item);
-        }
-
-        public void AddFavoriteDishToUser(User user, Dish dish)
-        {
-            user.Dishes.Add(dish);
-        }
+        //public void Add(Dish item)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
