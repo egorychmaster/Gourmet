@@ -2,7 +2,7 @@
 using Gourmet.Domain.Repositories;
 using MediatR;
 
-namespace Gourmet.Application.Commands
+namespace Gourmet.Application.Commands.Users
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {

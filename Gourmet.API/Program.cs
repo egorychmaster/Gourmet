@@ -1,10 +1,12 @@
 using Gourmet.API.StartupTasks;
 using Gourmet.Infrastructure.Database;
-using Gourmet.Application.Commands;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Gourmet.Domain.Repositories;
 using Gourmet.Infrastructure.RepositoriesCommands;
+using Gourmet.Application.Commands.Users;
+using Gourmet.Infrastructure.RepositoriesQueries;
+using Gourmet.Application.Queries.Favorites;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,10 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies
 
 // Repositories commands.
 builder.Services.AddScoped<IUserCommandsRepository, UserCommandsRepository>();
+
+// Repositories queries.
+builder.Services.AddScoped<IFavoriteQueriesRepository, FavoriteQueriesRepository>();
+//builder.Services.AddScoped<IUserQueriesRepository, UserQueriesRepository>();
 
 
 var app = builder.Build();

@@ -1,19 +1,16 @@
 ﻿using Gourmet.Domain.Enums;
 using MediatR;
 
-namespace Gourmet.Application.Commands
+namespace Gourmet.Application.Commands.Users
 {
-    public class UpdateUserCommand : IRequest<int>
+    public class CreateUserCommand : IRequest<int>
     {
-        public UpdateUserCommand(int id, string name, SexType sex, int age)
+        public CreateUserCommand(string name, SexType sex, int age)
         {
-            Id = id;
             Name = name;
             Sex = sex;
             Age = age;
         }
-
-        public int Id { get; set; }
 
         /// <summary>
         /// Имя
