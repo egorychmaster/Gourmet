@@ -52,10 +52,11 @@ namespace Gourmet.API.Controllers
         /// <param name="id">Идентификатор пользователя.</param>
         /// <returns>Блюда.</returns>
         [HttpGet("{id}/FavoriteDishes")]
-        public async Task<ActionResult<IEnumerable<DishDTO>>> GetFavoriteDishesByUserAsync([FromRoute] int id)
+        public async Task<ActionResult<IEnumerable<DishModel>>> GetFavoriteDishesByUserAsync([FromRoute] int id)
         {
             var query = new GetFavoriteDishesByUserQuery(id);
-            return Ok(await _mediator.Send(query));
+            var result = await _mediator.Send(query);
+            return Ok(result.Select(x => new DishModel(x.Id, x.Name)));
         }
 
         #endregion Favorites
