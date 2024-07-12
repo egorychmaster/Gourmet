@@ -26,12 +26,6 @@ namespace Gourmet.Infrastructure.RepositoriesCommands
             _context.Users.Add(item);
         }
 
-        public void AddFavoriteDishToUser(User user, Dish dish)
-        {
-            user.Dishes.Add(dish);
-        }
-
-
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _context.SaveChangesAsync(cancellationToken);

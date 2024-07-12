@@ -21,12 +21,6 @@ namespace Gourmet.Infrastructure.RepositoriesCommands
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        //public void Add(Dish item)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _context.SaveChangesAsync(cancellationToken);

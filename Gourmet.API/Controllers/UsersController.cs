@@ -69,7 +69,21 @@ namespace Gourmet.API.Controllers
         public async Task<ActionResult> AddFavoriteDishToUserAsync([FromRoute] int id, int dishId)
         {
             var command = new AddFavoriteDishToUserCommand(id, dishId);
-            var result = await _mediator.Send(command);
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Удалить блюдо из любимых у пользователя.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}/FavoriteDishes/{dishId}")]
+        public async Task<ActionResult> DeleteUsersFavoriteDishAsync([FromRoute] int id, int dishId)
+        {
+            var command = new DeleteUsersFavoriteDishCommand(id, dishId);
+            await _mediator.Send(command);
             return Ok();
         }
         #endregion Favorites

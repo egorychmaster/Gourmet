@@ -4,8 +4,6 @@
     {
         Task<Dish> GetAsync(int id);
 
-        //void Add(Dish item);
-
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
