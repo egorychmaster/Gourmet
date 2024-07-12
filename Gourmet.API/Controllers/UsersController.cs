@@ -1,8 +1,7 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Gourmet.API.Models;
 using Gourmet.Application.Commands;
-using Gourmet.API.Models;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gourmet.API.Controllers
 {
@@ -26,6 +25,20 @@ namespace Gourmet.API.Controllers
         public async Task<ActionResult<int>> CreateUserAsync([FromBody] UserModel input)
         {
             var command = new CreateUserCommand(input.Name, input.Sex, input.Age);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Обновить профиль пользователя.
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        /// <param name="input"></param>
+        /// <returns>Идентификатор пользователя</returns>
+        [HttpPut("{id}/Profile")]
+        public async Task<ActionResult<int>> UpdateUserAsync([FromRoute]int id, [FromBody] UserModel input)
+        {
+            var command = new UpdateUserCommand(id, input.Name, input.Sex, input.Age);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
