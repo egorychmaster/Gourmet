@@ -1,4 +1,5 @@
 ﻿using Gourmet.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gourmet.API.Models
 {

@@ -5,7 +5,7 @@ namespace Gourmet.Application.Queries.Users
 {
     public class GetFilterUsersQuery : IRequest<IEnumerable<UserDTO>>
     {
-        public GetFilterUsersQuery(int userId, SexType sex, int age, IEnumerable<int> dishIds) 
+        public GetFilterUsersQuery(int userId, SexType sex, int age, IEnumerable<int>? dishIds) 
         {
             UserId = userId;
             Sex = sex;
@@ -19,6 +19,6 @@ namespace Gourmet.Application.Queries.Users
 
         public int Age { get; set; }
 
-        public IEnumerable<int> DishIds { get; set; }
+        public IEnumerable<int>? DishIds { get; set; }
     }
 }

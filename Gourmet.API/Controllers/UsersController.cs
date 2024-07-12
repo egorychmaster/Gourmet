@@ -35,13 +35,13 @@ namespace Gourmet.API.Controllers
         /// <summary>
         /// Обновить профиль пользователя.
         /// </summary>
-        /// <param name="id">Идентификатор пользователя</param>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
         /// <param name="input"></param>
         /// <returns>Идентификатор пользователя</returns>
-        [HttpPut("{id}/Profile")]
-        public async Task<ActionResult<int>> UpdateUserAsync([FromRoute]int id, [FromBody] UserModel input)
+        [HttpPut("{currentUserId}/Profile")]
+        public async Task<ActionResult<int>> UpdateUserAsync([FromRoute]int currentUserId, [FromBody] UserModel input)
         {
-            var command = new UpdateUserCommand(id, input.Name, input.Sex, input.Age);
+            var command = new UpdateUserCommand(currentUserId, input.Name, input.Sex, input.Age);
             var result = await _mediator.Send(command);
             return Ok(result);
         }
@@ -51,12 +51,12 @@ namespace Gourmet.API.Controllers
         /// <summary>
         /// Вернуть список любимых блюд пользователя.
         /// </summary>
-        /// <param name="id">Идентификатор пользователя.</param>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
         /// <returns>Блюда.</returns>
-        [HttpGet("{id}/FavoriteDishes")]
-        public async Task<ActionResult<IEnumerable<DishModel>>> GetFavoriteDishesByUserAsync([FromRoute] int id)
+        [HttpGet("{currentUserId}/FavoriteDishes")]
+        public async Task<ActionResult<IEnumerable<DishModel>>> GetFavoriteDishesByUserAsync([FromRoute] int currentUserId)
         {
-            var query = new GetFavoriteDishesByUserQuery(id);
+            var query = new GetFavoriteDishesByUserQuery(currentUserId);
             var result = await _mediator.Send(query);
             return Ok(result.Select(x => new DishModel(x.Id, x.Name)));
         }
@@ -64,13 +64,13 @@ namespace Gourmet.API.Controllers
         /// <summary>
         /// Добавить любимое блюдо пользователю.
         /// </summary>
-        /// <param name="id">Идентификатор пользователя.</param>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
         /// <param name="dishId">Идентификатор блюда.</param>
         /// <returns></returns>
-        [HttpPost("{id}/FavoriteDishes/{dishId}")]
-        public async Task<ActionResult> AddFavoriteDishToUserAsync([FromRoute] int id, int dishId)
+        [HttpPost("{currentUserId}/FavoriteDishes/{dishId}")]
+        public async Task<ActionResult> AddFavoriteDishToUserAsync([FromRoute] int currentUserId, int dishId)
         {
-            var command = new AddFavoriteDishToUserCommand(id, dishId);
+            var command = new AddFavoriteDishToUserCommand(currentUserId, dishId);
             await _mediator.Send(command);
             return Ok();
         }
@@ -78,13 +78,13 @@ namespace Gourmet.API.Controllers
         /// <summary>
         /// Удалить блюдо из любимых у пользователя.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
         /// <param name="dishId"></param>
         /// <returns></returns>
-        [HttpDelete("{id}/FavoriteDishes/{dishId}")]
-        public async Task<ActionResult> DeleteUsersFavoriteDishAsync([FromRoute] int id, int dishId)
+        [HttpDelete("{currentUserId}/FavoriteDishes/{dishId}")]
+        public async Task<ActionResult> DeleteUsersFavoriteDishAsync([FromRoute] int currentUserId, int dishId)
         {
-            var command = new DeleteUsersFavoriteDishCommand(id, dishId);
+            var command = new DeleteUsersFavoriteDishCommand(currentUserId, dishId);
             await _mediator.Send(command);
             return Ok();
         }
@@ -94,14 +94,14 @@ namespace Gourmet.API.Controllers
         /// <summary>
         /// Фильтр по другим пользователям.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        [HttpPost("{id}/Filter")]
+        [HttpPost("{currentUserId}/Filter")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetFilterAsync(
-            [FromRoute] int id, FilterModel filter)
+            [FromRoute] int currentUserId, FilterModel filter)
         {
-            var query = new GetFilterUsersQuery(id, filter.Sex, filter.Age, filter.DishIds);
+            var query = new GetFilterUsersQuery(currentUserId, filter.Sex, filter.Age, filter.DishIds);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

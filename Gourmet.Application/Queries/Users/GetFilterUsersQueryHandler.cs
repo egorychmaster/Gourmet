@@ -13,6 +13,9 @@ namespace Gourmet.Application.Queries.Users
 
         public async Task<IEnumerable<UserDTO>> Handle(GetFilterUsersQuery request, CancellationToken cancellationToken)
         {
+            if(request.Age == 0)
+                throw new ArgumentException(nameof(request.Age));
+
             var users = await _userQueries.GetFilterUsersAsync(request.UserId, request.Sex, request.Age, request.DishIds);
 
             return users.Select(x => new UserDTO(x.Id, x.Name, x.Sex, x.Age));
