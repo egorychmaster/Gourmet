@@ -1,4 +1,6 @@
-﻿namespace Gourmet.Domain
+﻿using Gourmet.Domain.Enums;
+
+namespace Gourmet.Domain
 {
     public class User
     {
@@ -15,7 +17,7 @@
         /// <summary>
         /// Пол.
         /// </summary>
-        public bool Sex { get; set; }
+        public SexType Sex { get; set; }
 
         /// <summary>
         /// Возраст.

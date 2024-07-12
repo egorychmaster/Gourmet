@@ -1,4 +1,5 @@
 ﻿using Gourmet.Domain;
+using Gourmet.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gourmet.Infrastructure.Database
@@ -21,6 +22,10 @@ namespace Gourmet.Infrastructure.Database
 
                 // Limit the size of columns to use efficient database types
                 eb.Property(e => e.Name).HasMaxLength(TablesConst.UserFldNameLenght).IsRequired();
+                eb.Property(e => e.Sex)
+                    .HasConversion(
+                        v => (int)v,
+                        v => (SexType)v);
 
                 // Relationships
                 // Связь пользователя и его любимых блюд.

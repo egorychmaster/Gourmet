@@ -94,8 +94,8 @@ namespace Gourmet.Infrastructure.Database.Migrations
                         .HasMaxLength(125)
                         .HasColumnType("nvarchar(125)");
 
-                    b.Property<bool>("Sex")
-                        .HasColumnType("bit");
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

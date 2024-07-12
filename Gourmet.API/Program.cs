@@ -1,7 +1,8 @@
 using Gourmet.API.StartupTasks;
 using Gourmet.Infrastructure.Database;
-using Microsoft.AspNetCore.Builder.Extensions;
+using Gourmet.Application.Commands;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,15 @@ builder.Services.AddDbContextFactory<GourmetContext>(opt => opt.UseSqlServer(con
 //builder.Services.AddDbContext<GourmetContext>(options => options.UseSqlServer(connection));
 // Инициализация БД.
 builder.Services.AddHostedService<DatabaseInitialization>();
+
+// Медиатор ищет обработчики в этих сборках.
+var assemblies = new Assembly[]
+{
+    typeof(Program).GetTypeInfo().Assembly,
+    typeof(UserCreateOrUpdateCommand).GetTypeInfo().Assembly,
+};
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+
 
 var app = builder.Build();
 

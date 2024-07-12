@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gourmet.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(GourmetContext))]
-    [Migration("20240712082819_InitialCreate")]
+    [Migration("20240712094857_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -97,8 +97,8 @@ namespace Gourmet.Infrastructure.Database.Migrations
                         .HasMaxLength(125)
                         .HasColumnType("nvarchar(125)");
 
-                    b.Property<bool>("Sex")
-                        .HasColumnType("bit");
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

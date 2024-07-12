@@ -1,4 +1,5 @@
 ﻿using Gourmet.Domain;
+using Gourmet.Domain.Enums;
 using Gourmet.Infrastructure.Database;
 
 namespace Gourmet.API.StartupTasks
@@ -64,35 +65,35 @@ namespace Gourmet.API.StartupTasks
             {
                 //Id = 1,
                 Name = "Вася",
-                Sex = true,
+                Sex = SexType.Man,
                 Age = 25,
             },
             new()
             {
                 //Id = 2,
                 Name = "Анжела",
-                Sex = false,
+                Sex = SexType.Woman,
                 Age = 25
             },
             new()
             {
                 //Id = 3,
                 Name = "Лена",
-                Sex = false,
+                Sex = SexType.Woman,
                 Age = 30
             },
             new()
             {
                 //Id = 4,
                 Name = "Лев",
-                Sex = true,
+                Sex = SexType.Man,
                 Age = 35
             },
             new()
             {
                 //Id = 5,
                 Name = "Пабло",
-                Sex = true,
+                Sex = SexType.Man,
                 Age = 40
             },
         };
