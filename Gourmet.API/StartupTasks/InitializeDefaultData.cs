@@ -20,23 +20,23 @@ namespace Gourmet.API.StartupTasks
             // Устанавливаю любимые блюда
             var user = db.Users.FirstOrDefault(x => x.Name == _userIds[UserType.Vasya]);
             var dish = db.Dishes.FirstOrDefault(x => x.Name == _dishIds[DishType.Potato]);
-            user.Dishes.Add(dish);
+            user.AddDish(dish);
 
             user = db.Users.FirstOrDefault(x => x.Name == _userIds[UserType.Angela]);
             dish = db.Dishes.FirstOrDefault(x => x.Name == _dishIds[DishType.SoupKharcho]);
-            user.Dishes.Add(dish);
+            user.AddDish(dish);
 
             user = db.Users.FirstOrDefault(x => x.Name == _userIds[UserType.Lena]);
             dish = db.Dishes.FirstOrDefault(x => x.Name == _dishIds[DishType.AmateurCarp]);
-            user.Dishes.Add(dish);
+            user.AddDish(dish);
 
             user = db.Users.FirstOrDefault(x => x.Name == _userIds[UserType.Lev]);
             dish = db.Dishes.FirstOrDefault(x => x.Name == _dishIds[DishType.CaesarSalad]);
-            user.Dishes.Add(dish);
+            user.AddDish(dish);
 
             user = db.Users.FirstOrDefault(x => x.Name == _userIds[UserType.Pablo]);
             dish = db.Dishes.FirstOrDefault(x => x.Name == _dishIds[DishType.Shrimps]);
-            user.Dishes.Add(dish);
+            user.AddDish(dish);
 
 
             await db.SaveChangesAsync();
@@ -61,41 +61,11 @@ namespace Gourmet.API.StartupTasks
             };
         private static IEnumerable<User> Users => new List<User>()
         {
-            new()
-            {
-                //Id = 1,
-                Name = "Вася",
-                Sex = SexType.Man,
-                Age = 25,
-            },
-            new()
-            {
-                //Id = 2,
-                Name = "Анжела",
-                Sex = SexType.Woman,
-                Age = 25
-            },
-            new()
-            {
-                //Id = 3,
-                Name = "Лена",
-                Sex = SexType.Woman,
-                Age = 30
-            },
-            new()
-            {
-                //Id = 4,
-                Name = "Лев",
-                Sex = SexType.Man,
-                Age = 35
-            },
-            new()
-            {
-                //Id = 5,
-                Name = "Пабло",
-                Sex = SexType.Man,
-                Age = 40
-            },
+            new("Вася", SexType.Man, 25),
+            new("Анжела", SexType.Woman, 25),
+            new("Лена", SexType.Woman, 30),
+            new("Лев", SexType.Man, 35),
+            new("Пабло", SexType.Man, 40)
         };
 
         private enum DishType

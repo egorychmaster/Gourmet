@@ -18,9 +18,9 @@ namespace Gourmet.Application.Commands.Users
             var user = await _userRepository.GetAsync(command.Id);
             if (user == null) throw new NotFoundException($"User not found with id={command.Id}.");
 
-            user.Name = command.Name;
-            user.Sex = command.Sex;
-            user.Age = command.Age;
+            user.SetName(command.Name);
+            user.SetSex(command.Sex);
+            user.SetAge(command.Age);
 
             await _userRepository.SaveChangesAsync(cancellationToken);
 

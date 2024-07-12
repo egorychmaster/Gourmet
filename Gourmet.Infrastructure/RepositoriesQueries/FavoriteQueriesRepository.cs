@@ -15,7 +15,7 @@ namespace Gourmet.Infrastructure.RepositoriesQueries
             _db = db;
         }
 
-        public async Task<List<Dish>> GetDishesByUserAsync(int userId)
+        public async Task<IEnumerable<Dish>> GetDishesByUserAsync(int userId)
         {
             var user = await _db.Users
                 .AsNoTracking()

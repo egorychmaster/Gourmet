@@ -27,8 +27,7 @@ namespace Gourmet.Application.Commands.Favorites
             if (dish == null) 
                 throw new NotFoundException($"Dish with id={command.DishId} not found.");
 
-            user.Dishes.Add(dish);
-            //_userRepository.AddFavoriteDishToUser(user, dish);
+            user.AddDish(dish);
             await _userRepository.SaveChangesAsync(cancellationToken);
 
             return true;

@@ -15,12 +15,7 @@ namespace Gourmet.Application.Commands.Users
 
         public async Task<int> Handle(CreateUserCommand command, CancellationToken cancellationToken)
         {
-            var user = new User()
-            {
-                Name = command.Name,
-                Sex = command.Sex,
-                Age = command.Age
-            };
+            var user = new User(command.Name, command.Sex, command.Age);
 
             _userRepository.Add(user);
             await _userRepository.SaveChangesAsync(cancellationToken);

@@ -28,7 +28,7 @@ namespace Gourmet.Application.Commands.Favorites
             if (dish == null)
                 throw new NotFoundException($"Dish with id={command.DishId} not found.");
 
-            user.Dishes.Remove(dish);
+            user.RemoveDish(dish);
             await _userRepository.SaveChangesAsync(cancellationToken);
 
             return true;
