@@ -9,7 +9,7 @@ namespace Gourmet.Application.Queries.Favorites
 
         public GetFavoriteDishesByUserQueryHandler(IFavoriteQueriesRepository favoriteQueries)
         {
-            _favoriteQueries = favoriteQueries;
+            _favoriteQueries = favoriteQueries ?? throw new ArgumentNullException(nameof(favoriteQueries));
         }
 
         public async Task<IEnumerable<DishDTO>> Handle(GetFavoriteDishesByUserQuery request, CancellationToken cancellationToken)

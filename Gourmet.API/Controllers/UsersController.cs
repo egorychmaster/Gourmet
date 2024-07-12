@@ -2,6 +2,7 @@
 using Gourmet.Application.Commands.Favorites;
 using Gourmet.Application.Commands.Users;
 using Gourmet.Application.Queries.Favorites;
+using Gourmet.Application.Queries.Users;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,6 +46,7 @@ namespace Gourmet.API.Controllers
             return Ok(result);
         }
 
+
         #region Favorites
         /// <summary>
         /// Вернуть список любимых блюд пользователя.
@@ -87,5 +89,21 @@ namespace Gourmet.API.Controllers
             return Ok();
         }
         #endregion Favorites
+
+
+        /// <summary>
+        /// Фильтр по другим пользователям.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/Filter")]
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetFilterAsync(
+            [FromRoute] int id, FilterModel filter)
+        {
+            var query = new GetFilterUsersQuery(id, filter.Sex, filter.Age, filter.DishIds);
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

@@ -7,6 +7,7 @@ using Gourmet.Infrastructure.RepositoriesCommands;
 using Gourmet.Application.Commands.Users;
 using Gourmet.Infrastructure.RepositoriesQueries;
 using Gourmet.Application.Queries.Favorites;
+using Gourmet.Application.Queries.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +45,7 @@ builder.Services.AddScoped<IDishCommandsRepository, DishCommandsRepository>();
 
 // Repositories queries.
 builder.Services.AddScoped<IFavoriteQueriesRepository, FavoriteQueriesRepository>();
-//builder.Services.AddScoped<IUserQueriesRepository, UserQueriesRepository>();
+builder.Services.AddScoped<IUserQueriesRepository, UserQueriesRepository>();
 
 
 var app = builder.Build();

@@ -13,12 +13,12 @@ namespace Gourmet.Infrastructure.RepositoriesQueries
         public FavoriteQueriesRepository(GourmetContext db)
         {
             _db = db;
+            db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public async Task<IEnumerable<Dish>> GetDishesByUserAsync(int userId)
         {
             var user = await _db.Users
-                .AsNoTracking()
                 .Include(x => x.Dishes)
                 .FirstOrDefaultAsync(x => x.Id == userId);
             if (user == null) throw new NotFoundException($"User with id={userId} not found.");
