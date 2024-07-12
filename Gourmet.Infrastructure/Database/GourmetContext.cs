@@ -20,7 +20,7 @@ namespace Gourmet.Infrastructure.Database
                 eb.HasKey(e => e.Id);
 
                 // Limit the size of columns to use efficient database types
-                eb.Property(e => e.Name).HasMaxLength(TableFieldsConst.UserFldNameLenght).IsRequired();
+                eb.Property(e => e.Name).HasMaxLength(TablesConst.UserFldNameLenght).IsRequired();
 
                 // Relationships
                 // Связь пользователя и его любимых блюд.
@@ -37,7 +37,7 @@ namespace Gourmet.Infrastructure.Database
                     );
 
                 // Maps to table
-                eb.ToTable("Users");
+                eb.ToTable(TablesConst.NameUsersTable);
             });
 
 
@@ -47,10 +47,11 @@ namespace Gourmet.Infrastructure.Database
                 eb.HasKey(e => e.Id);
 
                 // Limit the size of columns to use efficient database types
-                eb.Property(e => e.Name).HasMaxLength(TableFieldsConst.DishFldNameLenght).IsRequired();
+                //eb.Property(b => b.Id).ValueGeneratedOnAdd();
+                eb.Property(e => e.Name).HasMaxLength(TablesConst.DishFldNameLenght).IsRequired();
 
                 // Maps to table
-                eb.ToTable("Dishes");
+                eb.ToTable(TablesConst.NameDishesTable);
             });
 
             modelBuilder.Entity<FavoriteUserDish>(eb =>

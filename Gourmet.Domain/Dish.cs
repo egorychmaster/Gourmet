@@ -1,4 +1,6 @@
-﻿namespace Gourmet.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Gourmet.Domain
 {
     /// <summary>
     /// Блюдо.
@@ -8,6 +10,7 @@
         public Dish()
         { }
 
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;

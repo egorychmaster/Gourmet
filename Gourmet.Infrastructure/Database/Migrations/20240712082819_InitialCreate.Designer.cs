@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gourmet.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(GourmetContext))]
-    [Migration("20240711175033_InitialCreate")]
+    [Migration("20240712082819_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
