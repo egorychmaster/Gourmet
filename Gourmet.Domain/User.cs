@@ -30,10 +30,11 @@ namespace Gourmet.Domain
 
 
         #region Favorites
-        //private List<Dish> _dishes = new List<Dish>();
-        //public IReadOnlyCollection<Dish> Dishes => _dishes;
-        //public IReadOnlyCollection<Dish> Dishes => FavoriteDishes.Di;
-        public List<FavoriteUserDish> FavoriteDishes = new List<FavoriteUserDish>();
+        private List<FavoriteUserDish> _favoriteDishes = new List<FavoriteUserDish>();
+        /// <summary>
+        /// Список любимых блюд.
+        /// </summary>
+        public IReadOnlyCollection<FavoriteUserDish> FavoriteDishes => _favoriteDishes;
         #endregion Favorites
 
 
@@ -68,12 +69,12 @@ namespace Gourmet.Domain
         #region Dishes
         public void AddDish(Dish dish)
         {
-            FavoriteDishes.Add(new FavoriteUserDish(this, dish));
+            _favoriteDishes.Add(new FavoriteUserDish(this, dish));
         }
 
         public void RemoveDish(int dishId)
         {
-            FavoriteDishes = FavoriteDishes.Where(x => x.DishId != dishId).ToList();
+            _favoriteDishes = _favoriteDishes.Where(x => x.DishId != dishId).ToList();
         }
 
         /// <summary>
