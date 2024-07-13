@@ -38,6 +38,7 @@ namespace Gourmet.Domain
 
 
         #region Like
+        public List<LikedUserFavorite> LikedFavorites = new List<LikedUserFavorite>();
         //private List<FavoriteUserDish> _favoriteDishes = new List<FavoriteUserDish>();
         //public IReadOnlyCollection<FavoriteUserDish> FavoriteDishes => _favoriteDishes;
 
@@ -81,18 +82,18 @@ namespace Gourmet.Domain
         /// <param name="user"></param>
         /// <param name="dishId"></param>
         /// <exception cref="Exception"></exception>
-        //public void SetLikeDish(User user, int dishId)
-        //{
-        //    var favoriteDish = FavoriteDishes.FirstOrDefault(x => x.DishId == dishId);
-        //    if (favoriteDish == null)
-        //        throw new Exception("Dish not found.");
+        public void SetLikeDish(User user, int dishId)
+        {
+            var favoriteDish = FavoriteDishes.FirstOrDefault(x => x.DishId == dishId);
+            if (favoriteDish == null)
+                throw new Exception("Dish not found in favorites.");
 
-        //    // Уже лайкал этот пользователь.
-        //    if (favoriteDish!.LikedUsersDishes.Any(x => x.Id == user.Id))
-        //        return;
+            // Этот пользователь уже поставил лайк ранее.
+            if (user.LikedFavorites.Any(x => x.UserId == user.Id && x.FavoriteId == favoriteDish.Id))
+                return;
 
-        //    favoriteDish.LikedUsersDishes.Add(user);
-        //}
+            user.LikedFavorites.Add(new LikedUserFavorite(user, favoriteDish));
+        }
         #endregion Dishes
     }
 }

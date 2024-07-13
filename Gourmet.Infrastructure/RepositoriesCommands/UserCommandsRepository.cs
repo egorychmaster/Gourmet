@@ -18,7 +18,8 @@ namespace Gourmet.Infrastructure.RepositoriesCommands
         {
             return await _context.Users
                 .Include(x => x.FavoriteDishes).ThenInclude(x => x.Dish)
-                //.Include(x => x.FavoriteDishes).ThenInclude(x => x.LikedUsersDishes)
+                .Include(x => x.FavoriteDishes).ThenInclude(x => x.LikedUsers)
+                .Include(x => x.LikedFavorites)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 

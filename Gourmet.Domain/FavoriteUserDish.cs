@@ -27,6 +27,6 @@
         /// <summary>
         /// Пользователи лайкнувшие блюдо другого пользователя.
         /// </summary>
-        //public List<User> LikedUsersDishes { get; set; } = [];
+        public List<LikedUserFavorite> LikedUsers = new List<LikedUserFavorite>();
     }
 }

@@ -8,6 +8,14 @@
         public LikedUserFavorite()
         { }
 
+        public LikedUserFavorite(User user, FavoriteUserDish favorite)
+        {
+            User = user;
+            UserId = user.Id;
+            Favorite = favorite;
+            FavoriteId = favorite.Id;
+        }
+
         public int UserId { get; set; }
         public int FavoriteId { get; set; }
 

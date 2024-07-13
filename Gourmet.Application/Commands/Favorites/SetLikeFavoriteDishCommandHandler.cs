@@ -17,6 +17,9 @@ namespace Gourmet.Application.Commands.Favorites
 
         public async Task<bool> Handle(SetLikeFavoriteDishCommand command, CancellationToken cancellationToken)
         {
+            if(command.CurrentUserId == command.UserId)
+                throw new NotFoundException($"The user cannot like himself.");
+
             var currentUser = await _userRepository.GetAsync(command.CurrentUserId);
             if (currentUser == null)
                 throw new NotFoundException($"CurrentUserId not found with id={command.CurrentUserId}.");
@@ -25,7 +28,7 @@ namespace Gourmet.Application.Commands.Favorites
             if (user == null)
                 throw new NotFoundException($"User not found with id={command.UserId}.");
 
-            //user.SetLikeDish(currentUser, command.DishId);
+            user.SetLikeDish(currentUser, command.DishId);
             await _userRepository.SaveChangesAsync(cancellationToken);
 
             return true;
