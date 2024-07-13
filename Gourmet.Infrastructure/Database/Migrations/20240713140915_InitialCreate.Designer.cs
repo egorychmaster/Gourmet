@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gourmet.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(GourmetContext))]
-    [Migration("20240713130857_InitialCreate")]
+    [Migration("20240713140915_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -128,7 +128,9 @@ namespace Gourmet.Infrastructure.Database.Migrations
                 {
                     b.HasOne("Gourmet.Domain.FavoriteUserDish", "Favorite")
                         .WithMany("LikedUsers")
-                        .HasForeignKey("FavoriteId");
+                        .HasForeignKey("FavoriteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Gourmet.Domain.User", "User")
                         .WithMany("LikedFavorites")

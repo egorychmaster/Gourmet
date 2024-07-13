@@ -24,9 +24,28 @@
         public User User { get; set; } = null!;
         public Dish Dish { get; set; } = null!;
 
+
+        #region Favorites
+        private List<LikedUserFavorite> _likedUsers = new List<LikedUserFavorite>();
         /// <summary>
         /// Пользователи лайкнувшие блюдо другого пользователя.
         /// </summary>
-        public List<LikedUserFavorite> LikedUsers = new List<LikedUserFavorite>();
+        public IReadOnlyCollection<LikedUserFavorite> LikedUsers => _likedUsers;
+        #endregion Favorites
+
+
+        public void AddLike(User user)
+        {
+            // Этот пользователь уже поставил лайк ранее.
+            if (_likedUsers.Any(x => x.UserId == user.Id))
+                return;
+
+            _likedUsers.Add(new LikedUserFavorite(user, this));
+        }
+
+        public void DeleteAllLikes()
+        {
+            _likedUsers.Clear();
+        }
     }
 }

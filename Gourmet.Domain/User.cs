@@ -39,10 +39,11 @@ namespace Gourmet.Domain
 
 
         #region Like
-        public List<LikedUserFavorite> LikedFavorites = new List<LikedUserFavorite>();
-        //private List<FavoriteUserDish> _favoriteDishes = new List<FavoriteUserDish>();
-        //public IReadOnlyCollection<FavoriteUserDish> FavoriteDishes => _favoriteDishes;
-
+        private List<LikedUserFavorite> _likedFavorites = new List<LikedUserFavorite>();
+        /// <summary>
+        /// Лайки, котрые поставил пользователь блюдам других пользователей.
+        /// </summary>
+        public IReadOnlyCollection<LikedUserFavorite> LikedFavorites => _likedFavorites;
         #endregion Like
 
         public void SetName(string name)
@@ -74,7 +75,11 @@ namespace Gourmet.Domain
 
         public void RemoveDish(int dishId)
         {
-            _favoriteDishes = _favoriteDishes.Where(x => x.DishId != dishId).ToList();
+            FavoriteUserDish? favorite = _favoriteDishes.FirstOrDefault(x => x.DishId == dishId);
+            if (favorite == null) return;
+
+            favorite.DeleteAllLikes();
+            _favoriteDishes.Remove(favorite);
         }
 
         /// <summary>
@@ -85,15 +90,11 @@ namespace Gourmet.Domain
         /// <exception cref="Exception"></exception>
         public void SetLikeDish(User user, int dishId)
         {
-            var favoriteDish = FavoriteDishes.FirstOrDefault(x => x.DishId == dishId);
+            FavoriteUserDish? favoriteDish = FavoriteDishes.FirstOrDefault(x => x.DishId == dishId);
             if (favoriteDish == null)
                 throw new Exception("Dish not found in favorites.");
 
-            // Этот пользователь уже поставил лайк ранее.
-            if (user.LikedFavorites.Any(x => x.UserId == user.Id && x.FavoriteId == favoriteDish.Id))
-                return;
-
-            user.LikedFavorites.Add(new LikedUserFavorite(user, favoriteDish));
+            favoriteDish.AddLike(user);
         }
         #endregion Dishes
     }

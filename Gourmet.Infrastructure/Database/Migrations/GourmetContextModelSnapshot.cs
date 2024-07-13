@@ -125,7 +125,9 @@ namespace Gourmet.Infrastructure.Database.Migrations
                 {
                     b.HasOne("Gourmet.Domain.FavoriteUserDish", "Favorite")
                         .WithMany("LikedUsers")
-                        .HasForeignKey("FavoriteId");
+                        .HasForeignKey("FavoriteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Gourmet.Domain.User", "User")
                         .WithMany("LikedFavorites")

@@ -78,7 +78,8 @@ namespace Gourmet.Infrastructure.Database.Migrations
                         name: "FK_LikedUsersFavorites_FavoriteUsersDishes_FavoriteId",
                         column: x => x.FavoriteId,
                         principalTable: "FavoriteUsersDishes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LikedUsersFavorites_Users_UserId",
                         column: x => x.UserId,

@@ -76,7 +76,7 @@ namespace Gourmet.Infrastructure.Database
                 eb.HasMany(e => e.LikedUsers)
                     .WithOne(e => e.Favorite)
                     .HasForeignKey(e => e.FavoriteId)
-                    .IsRequired(false)
+                    .IsRequired()
                     ;
 
                 // Maps to table
