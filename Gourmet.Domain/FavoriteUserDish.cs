@@ -5,17 +5,28 @@
     /// </summary>
     public class FavoriteUserDish
     {
-        public FavoriteUserDish()
-        { }
+        public FavoriteUserDish() { }
+
+        public FavoriteUserDish(User user, Dish dish)
+        { 
+            UserId = user.Id;
+            User = user;
+
+            DishId = dish.Id;
+            Dish = dish;
+        }
 
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-        public int DishId { get; set; }
+        public int UserId { get; private set; }
+        public int DishId { get; private set; }
 
-        //public User User { get; set; } = null!;
-        //public Dish Dish { get; set; } = null!;
+        public User User { get; set; } = null!;
+        public Dish Dish { get; set; } = null!;
 
-        public List<User> LikedUsersDishes { get; set; } = [];
+        /// <summary>
+        /// Пользователи лайкнувшие блюдо другого пользователя.
+        /// </summary>
+        //public List<User> LikedUsersDishes { get; set; } = [];
     }
 }

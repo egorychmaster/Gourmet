@@ -27,7 +27,7 @@ namespace Gourmet.Infrastructure.RepositoriesQueries
 
             if (dishIds != null && dishIds.Count() > 0)
             {
-                usersQuery = usersQuery.Where(x => x.Dishes.Any(d => dishIds!.Contains(d.Id)));
+                usersQuery = usersQuery.Where(x => x.FavoriteDishes.Any(d => dishIds!.Contains(d.DishId)));
             }
 
             return await usersQuery.ToListAsync();

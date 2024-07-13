@@ -88,6 +88,21 @@ namespace Gourmet.API.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        /// <summary>
+        /// Отправить лайк на определенное блюдо пользователя.
+        /// </summary>
+        /// <param name="currentUserId">Идентификатор текущего пользователя.</param>
+        /// <param name="dishId">Идентификатор блюда.</param>
+        /// <param name="userId">Идентификатор пользователя, блюду которого ставят лайк.</param>
+        /// <returns></returns>
+        [HttpPost("{currentUserId}/FavoriteDishes/{dishId}/User/{userId}/Like")]
+        public async Task<ActionResult> SetLikeFavoriteDishAsync([FromRoute] int currentUserId, int dishId, int userId)
+        {
+            var command = new SetLikeFavoriteDishCommand(currentUserId, dishId, userId);
+            await _mediator.Send(command);
+            return Ok();
+        }
         #endregion Favorites
 
 

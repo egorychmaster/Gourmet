@@ -20,8 +20,6 @@ namespace Gourmet.Application.Commands.Favorites
             var user = await _userRepository.GetAsync(command.Id);
             if (user == null) 
                 throw new NotFoundException($"User not found with id={command.Id}.");
-            if (user.Dishes.Any(x => x.Id == command.DishId)) 
-                throw new Exception($"Dish with id={command.DishId} already exists.");
 
             var dish = await _dishRepository.GetAsync(command.DishId);
             if (dish == null) 

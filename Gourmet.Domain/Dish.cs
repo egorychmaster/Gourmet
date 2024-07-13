@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Gourmet.Domain
+﻿namespace Gourmet.Domain
 {
     /// <summary>
     /// Блюдо.
@@ -10,12 +8,12 @@ namespace Gourmet.Domain
         public Dish()
         { }
 
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 
 
-        public List<User> Users { get; set; } = [];
+        public List<FavoriteUserDish> FavoriteUsers { get; set; } = [];
+        //public List<User> Users { get; set; } = [];
     }
 }

@@ -19,11 +19,11 @@ namespace Gourmet.Infrastructure.RepositoriesQueries
         public async Task<IEnumerable<Dish>> GetDishesByUserAsync(int userId)
         {
             var user = await _db.Users
-                .Include(x => x.Dishes)
+                .Include(x => x.FavoriteDishes).ThenInclude(x => x.Dish)
                 .FirstOrDefaultAsync(x => x.Id == userId);
             if (user == null) throw new NotFoundException($"User with id={userId} not found.");
 
-            return user.Dishes;
+            return user.FavoriteDishes.Select(x => x.Dish).ToList();
         }
     }
 }

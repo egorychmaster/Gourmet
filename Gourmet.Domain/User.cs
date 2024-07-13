@@ -29,13 +29,19 @@ namespace Gourmet.Domain
         public int Age { get; private set; }
 
 
-        private List<Dish> _dishes = new List<Dish>();
-        public IReadOnlyCollection<Dish> Dishes => _dishes;
+        #region Favorites
+        //private List<Dish> _dishes = new List<Dish>();
+        //public IReadOnlyCollection<Dish> Dishes => _dishes;
+        //public IReadOnlyCollection<Dish> Dishes => FavoriteDishes.Di;
+        public List<FavoriteUserDish> FavoriteDishes = new List<FavoriteUserDish>();
+        #endregion Favorites
 
 
-        private List<FavoriteUserDish> _likedFavoriteDishes = new List<FavoriteUserDish>();
-        public IReadOnlyCollection<FavoriteUserDish> LikedFavoriteDishes => _likedFavoriteDishes;
+        #region Like
+        //private List<FavoriteUserDish> _favoriteDishes = new List<FavoriteUserDish>();
+        //public IReadOnlyCollection<FavoriteUserDish> FavoriteDishes => _favoriteDishes;
 
+        #endregion Like
 
         public void SetName(string name)
         {
@@ -61,13 +67,32 @@ namespace Gourmet.Domain
         #region Dishes
         public void AddDish(Dish dish)
         {
-            _dishes.Add(dish);
+            FavoriteDishes.Add(new FavoriteUserDish(this, dish));
         }
 
-        public void RemoveDish(Dish dish)
+        public void RemoveDish(int dishId)
         {
-            _dishes.Remove(dish);
+            FavoriteDishes = FavoriteDishes.Where(x => x.DishId != dishId).ToList();
         }
+
+        /// <summary>
+        /// Поставить лайк блюду.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="dishId"></param>
+        /// <exception cref="Exception"></exception>
+        //public void SetLikeDish(User user, int dishId)
+        //{
+        //    var favoriteDish = FavoriteDishes.FirstOrDefault(x => x.DishId == dishId);
+        //    if (favoriteDish == null)
+        //        throw new Exception("Dish not found.");
+
+        //    // Уже лайкал этот пользователь.
+        //    if (favoriteDish!.LikedUsersDishes.Any(x => x.Id == user.Id))
+        //        return;
+
+        //    favoriteDish.LikedUsersDishes.Add(user);
+        //}
         #endregion Dishes
     }
 }

@@ -20,15 +20,8 @@ namespace Gourmet.Application.Commands.Favorites
             var user = await _userRepository.GetAsync(command.Id);
             if (user == null)
                 throw new NotFoundException($"User not found with id={command.Id}.");
-            // Если блюда нет у пользователя - выходим.
-            if (!user.Dishes.Any(x => x.Id == command.DishId))
-                return true;
 
-            var dish = await _dishRepository.GetAsync(command.DishId);
-            if (dish == null)
-                throw new NotFoundException($"Dish with id={command.DishId} not found.");
-
-            user.RemoveDish(dish);
+            user.RemoveDish(command.DishId);
             await _userRepository.SaveChangesAsync(cancellationToken);
 
             return true;

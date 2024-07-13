@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gourmet.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(GourmetContext))]
-    [Migration("20240712144946_InitialCreate")]
+    [Migration("20240713114806_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -66,21 +66,6 @@ namespace Gourmet.Infrastructure.Database.Migrations
                     b.ToTable("FavoriteUsersDishes", (string)null);
                 });
 
-            modelBuilder.Entity("Gourmet.Domain.LikedUserFavorite", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FavoriteId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "FavoriteId");
-
-                    b.HasIndex("FavoriteId");
-
-                    b.ToTable("LikedUsersFavorites", (string)null);
-                });
-
             modelBuilder.Entity("Gourmet.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -107,36 +92,31 @@ namespace Gourmet.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Gourmet.Domain.FavoriteUserDish", b =>
                 {
-                    b.HasOne("Gourmet.Domain.Dish", null)
-                        .WithMany()
+                    b.HasOne("Gourmet.Domain.Dish", "Dish")
+                        .WithMany("FavoriteUsers")
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gourmet.Domain.User", null)
-                        .WithMany()
+                    b.HasOne("Gourmet.Domain.User", "User")
+                        .WithMany("FavoriteDishes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Gourmet.Domain.LikedUserFavorite", b =>
-                {
-                    b.HasOne("Gourmet.Domain.FavoriteUserDish", "Favorite")
-                        .WithMany()
-                        .HasForeignKey("FavoriteId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Gourmet.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Favorite");
+                    b.Navigation("Dish");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Gourmet.Domain.Dish", b =>
+                {
+                    b.Navigation("FavoriteUsers");
+                });
+
+            modelBuilder.Entity("Gourmet.Domain.User", b =>
+                {
+                    b.Navigation("FavoriteDishes");
                 });
 #pragma warning restore 612, 618
         }
