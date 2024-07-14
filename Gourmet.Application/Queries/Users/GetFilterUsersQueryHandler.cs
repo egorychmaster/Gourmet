@@ -16,7 +16,7 @@ namespace Gourmet.Application.Queries.Users
             if(request.Age == 0)
                 throw new ArgumentException(nameof(request.Age));
 
-            var users = await _userQueries.GetFilterUsersAsync(request.UserId, request.Sex, request.Age, request.DishIds);
+            var users = await _userQueries.GetFilterUsersAsync(request.CurrentUserId, request.Sex, request.Age, request.DishIds);
 
             return users.Select(x => new UserDTO(x.Id, x.Name, x.Sex, x.Age));
         }

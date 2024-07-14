@@ -5,13 +5,15 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gourmet.API", "Gourmet.API\Gourmet.API.csproj", "{84505B7C-D712-475C-8E70-4D5238917EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gourmet.Domain", "Gourmet.Domain\Gourmet.Domain.csproj", "{A5AFE0DA-0708-411F-A419-3AF962CA5151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gourmet.Domain", "Gourmet.Domain\Gourmet.Domain.csproj", "{A5AFE0DA-0708-411F-A419-3AF962CA5151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gourmet.Application", "Gourmet.Application\Gourmet.Application.csproj", "{5BBFF446-0B1A-4908-BAA8-C270FA20DCDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gourmet.Application", "Gourmet.Application\Gourmet.Application.csproj", "{5BBFF446-0B1A-4908-BAA8-C270FA20DCDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gourmet.Infrastructure", "Gourmet.Infrastructure\Gourmet.Infrastructure.csproj", "{0E3DA591-27BE-4E4E-8BEB-167A6C1F3802}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gourmet.Infrastructure", "Gourmet.Infrastructure\Gourmet.Infrastructure.csproj", "{0E3DA591-27BE-4E4E-8BEB-167A6C1F3802}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1D8E367-9DF8-4790-873C-31F229FD1788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gourmet.UnitTest", "Gourmet.UnitTest\Gourmet.UnitTest.csproj", "{C14769B4-D644-4145-84BD-25EDC31A3E10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +37,16 @@ Global
 		{0E3DA591-27BE-4E4E-8BEB-167A6C1F3802}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E3DA591-27BE-4E4E-8BEB-167A6C1F3802}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E3DA591-27BE-4E4E-8BEB-167A6C1F3802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14769B4-D644-4145-84BD-25EDC31A3E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14769B4-D644-4145-84BD-25EDC31A3E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14769B4-D644-4145-84BD-25EDC31A3E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14769B4-D644-4145-84BD-25EDC31A3E10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C14769B4-D644-4145-84BD-25EDC31A3E10} = {E1D8E367-9DF8-4790-873C-31F229FD1788}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3424532E-4CC5-400B-9200-7BF17EE05B36}
